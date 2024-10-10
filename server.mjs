@@ -4,14 +4,20 @@ import fs from 'fs';
 
 const app = express();
 const PORT = 3000;
-
+app.use(express.static('./styles'));
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello !');
 });
 
 app.set('views', './views');
-app.set('view engine', 'cat');
 
+const Middleware = function(req,res,next){
+    console.log("thanks for stopping by")
+};
+app.use(Middleware);
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+})
 
 
 
